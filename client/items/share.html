@@ -1,0 +1,40 @@
+<template name="share">
+    {{#if currentUser}}
+        <form class="add-item half-d padding">
+            <input class="form-control" type="text" name="title" placeholder="Title" maxlength="50" required/>
+            <input class="form-control" type="text" name="description" placeholder="Description" maxlength="500"/>
+            <p>Item price</p>
+            <input type="number" name="perHour" placeholder="Per hour" maxlength="4" required/>
+            <input type="number" name="perDay" placeholder="Per day" required/>
+            <input type="number" name="perWeek" placeholder="Per week" required/>
+
+            <div class="form-group">
+                <label for="categories">Select Category:</label>
+                <select name="category" class="form-control" id="categories" required>
+                    <option disabled selected>--Please select--</option>
+                    {{#each categories}}
+                        <option>{{title}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="locations">Select Location:</label>
+                <select name="location" class="form-control" id="locations" required>
+                    <option disabled selected>--Please select--</option>
+                    {{#each locations}}
+                        <option>{{place}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <input type="file" class="myFileInput" name="featured">
+            <button class="submit-btn" type="submit">Submit</button>
+        </form>
+    {{else}}
+        <div class="half-d">
+            <p class="tec">You need to be logged in to share an item.</p>
+            {{> atForm}}
+        </div>
+    {{/if}}
+</template>

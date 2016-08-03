@@ -1,0 +1,25 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agorea</title>
+</head>
+	
+<template name="layout">
+    {{> navigation}}
+	    <div class="topad">
+	    	{{> yield}}
+		</div>
+    {{> footer}}
+</template>
+
+<template name="footer">
+    <div class="footer-wrapper genpad">
+        AGOREA<br>
+        <ul class="footer-nav">
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/about">ABOUT</a></li>
+            <li><a href="/contact">CONTACT</a></li>
+        </ul>
+        © Agorea - 2016 | All rights reserved
+    </div>
+</template>

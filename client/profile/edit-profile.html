@@ -1,0 +1,37 @@
+<template name="editProfile">
+    <div class="row padding">
+        <div class="col-md-9 f-none center-block">
+            <form class="edit-profile"> 
+                <div class="col-md-4 tec">
+                    <img class="profile-picture" src="{{imagePreview}}">
+                    <p class="tec">Change profile picture</p>
+                    <input type="file" class="myFileInput">
+                    <input class="hide-it" type="text" name="featured" value="{{profilePicture}}">
+                </div>
+
+                <div class="col-md-8">
+                        <p>About you</p>
+                        <input type="text" name="about" value="{{about}}" placeholder="Tell us a little bit about yourself" class="form-control">
+                        
+                        <div class="form-group">
+                            <label for="locations">Your Location:</label>
+                            <select name="location" value="" class="form-control" id="locations">
+                                <option selected>{{userLocation}}</option>
+                                {{#each locations}}
+                                    <option>{{place}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        
+                        <p>Mobile number</p>
+                        <input type="text" name="mobile" value="{{phoneNumber}}" placeholder="Mobile number" class="form-control">
+                        
+                        <p>E-mail</p>
+                        <input type="text" name="email" value="{{email}}" placeholder="E-mail" class="form-control">
+                        
+                        <button type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>

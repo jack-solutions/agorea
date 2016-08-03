@@ -1,0 +1,135 @@
+<template name="adminPanel">
+	{{#if isAdmin}}
+		<div class="left-panel padding">
+			<ul class="admin-nav">
+				<li><a href="{{pathFor 'adminVerification'}}">User Verification</a></li>
+				<li><a href="{{pathFor 'itemManagement'}}">Item Management</a></li>
+				<li><a href="{{pathFor 'userManagement'}}">User Management</a></li>
+				<li><a href="{{pathFor 'adminCategories'}}">Categories</a></li>
+				<li><a href="{{pathFor 'adminLocations'}}">Locations</a></li>
+			</ul>
+		</div> 
+
+		<div class="right-panel padding">
+			{{> yield "admin-right"}}
+		</div>
+	{{else}}
+		You are not allowed to be here.
+	{{/if}}
+
+</template>
+
+<template name="adminVerification">
+	<ul class="verification-panel">
+		{{#each pending}}
+			<li>
+				<div class="ver-user-left">
+					<img class="profile-picture" src="{{profilePicture}}">{{username}}<br>
+					
+					<button class="verify btn">VERIFY</button>
+					<button class="reject btn">REJECT</button>	
+				</div>
+
+				<div class="ver-user-right">
+					<img class="fifty-per" src="{{idCopy}}">
+					<img class="fifty-per" src="{{idPhoto}}">
+				</div>
+				
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="adminCategories">
+	<form class="add-category">
+		Add Category: <input type="text" name="title" placeholder="Category name">
+	</form>
+	<ul class="admin-categories">
+		{{#each categories}}
+			<li>{{title}} - <a class="delete-cat">delete</a></li>
+		{{/each}}
+	</ul>
+</template>
+
+<template name="userManagement">
+
+	<input placeholder="Search by username" class="form-control first-name half-w" name="firstName">
+
+
+	<table class="admin-users" border="1">
+		<tr>
+			<td>Avatar</td>
+			<td>Username</td>
+			<td>E-mail</td>
+			<td>Phone Number</td>
+			<td>About</td>
+			<td>Location</td>
+		</tr>
+		{{#each users}}
+			<tr>
+				<td><img class="profile-picture" src="{{profilePicture}}">
+					{{#if isActive}}
+						<button class="make-inactive btn btn-danger">DEACTIVATE</button>
+					{{else}}
+						<button class="make-active btn btn-success">ACTIVATE</button>
+					{{/if}}	
+				</td>
+				<td>{{username}}</td>
+				<td>{{email}}</td>
+				<td>{{phoneNumber}}</td>
+				<td>{{about}}</td>
+				<td>{{place}}</td>
+			</tr>
+		{{/each}}
+	</table>
+</template>
+
+<template name="itemManagement">
+
+	<input placeholder="Search by item name" class="form-control item-name half-w" name="itemName">
+
+	<table class="admin-items" border="1">
+		<tr>
+			<td>Image</td>
+			<td>Owner</td>
+			<td>Title</td>
+			<td>Category</td>
+			<td>Description</td>
+			<td>Cost</td>
+			<td>Location</td>
+		</tr>
+		{{#each items}}
+			<tr>
+				<td>
+					<img class="item-owner" src="{{featured}}">
+					{{#if itemActive}}
+						<button class="make-inactive btn btn-danger">DEACTIVATE</button>
+					{{else}}
+						<button class="make-active btn btn-success">ACTIVATE</button>
+					{{/if}}	
+				</td>
+				<td><img class="item-owner" src="{{ownerPic}}">{{ownerName}}</td>
+		 		<td>{{title}}</td> 
+		 		<td>{{category}}</td>
+		    	<td>{{description}}</td>
+		    	<td>
+					${{perHour}}/hour <br>
+					${{perDay}}/day <br>
+			    	${{perWeek}}/week
+		      	</td>
+	      		<td>{{location}}</td>
+	      	</tr>
+		{{/each}}
+	</table>
+</template>
+
+<template name="adminLocations">
+	<form class="add-place">
+		Add Location: <input type="text" name="place" placeholder="Location">
+	</form>
+	<ul class="admin-places">
+		{{#each places}}
+			<li>{{place}} - <a class="delete-pla">delete</a></li>
+		{{/each}}
+	</ul>
+</template>

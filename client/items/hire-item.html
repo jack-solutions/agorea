@@ -1,0 +1,52 @@
+<template name="hireItem">
+	<div class="padding">
+		<div class="col-md-10 f-none center-block">
+ 			<div class="col-md-4">
+				<img src="{{featured}}" class="hire-featured">
+			</div>
+			<div class="col-md-8">
+				<h3>{{title}}</h3>
+				<form class="hire-item">
+					<textarea type="text" name="reason" class="form-control" placeholder="Briefly explain why you need this item" required></textarea>
+					<p>I would like to hire {{title}}</p>
+
+					<div>
+						<input type="radio" class="radioSelect" name="hireType" value="hour">Hourly
+					</div>
+
+					<div>
+						<input type="radio" class="radioSelect" name="hireType" value="day">Daily
+					</div>
+					
+					<div>
+						<input type="radio" class="radioSelect" name="hireType" value="week">Weekly
+					</div>
+					<br>
+					<div id="htime">	
+						<p>Give hire time</p>
+						<input type="number" name="hireTime" class="htime" required/>
+					</div>
+					
+					<br>
+
+					{{#if calculatedPrice}}
+						<div id="finalPrice">
+							<p>Hiring cost:</p> 
+							<input type="text" name="hirePrice" value="$ {{calculatedPrice}}" disabled/>
+						</div>
+					{{/if}}
+						
+
+					<br>
+					 <p>Pick start time</p>
+					 <div class="input-group datetimepicker">
+					    <input class="input-group-addon form-control date-time" type="text" name="startDate" value="{{startDate}}" required/>
+					 </div>
+					 <br> 
+
+					<button class="submit-btns" type="submit">Hire</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</template>

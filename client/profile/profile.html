@@ -1,0 +1,63 @@
+<template name="profile">
+    <div class="left-panel padding">
+        <img class="profile-picture" src="{{profilePicture}}">
+        {{#if userVerified}}
+        <div class="verified-div"><i class="fa fa-check-circle verified"></i></div>
+        {{/if}}
+        <p class="profile-username">{{firstName}} {{lastName}}</p>
+        <p class="profile-titles">About</p> {{about}}asd<br>
+        <p class="profile-titles">Location</p> {{place}}<br>
+        {{#if myProfile}}
+        <p class="profile-titles">Mobile</p> {{phoneNumber}}<br>
+        <p class="profile-titles">Email</p> {{email}}<br>
+        <a href="{{pathFor 'editProfile'}}">EDIT PROFILE</a>
+        {{/if}}
+    </div>
+    <div class="right-panel padding">
+        {{#if myProfile}}
+
+            {{#if isFullInactive}}
+                 <span class="alert">Your account was disabled by an admin. Please <a href="/contact">contact us</a>.</span>
+
+            {{/if}}
+                 
+            {{#if notVerified}}    
+                <span class="alert">You need to verify your identitiy to hire an item. <a href="/become-verified">Click here to become verified</a></span>
+            {{/if}}
+
+            {{#if verificationRejected}}    
+                <span class="alert">Your documents were rejected.<a href="/become-verified">Click here to upload new documents to become verified</a></span>
+            {{/if}}
+
+            {{#if verificationPending}}    
+                <span class="alert">Your verification is pending. You'll see a verified badge once we verifiy your identity.</span>
+            {{/if}}
+
+            <h4>Your items</h4><br>
+        {{else}}
+            <h4>{{username}}'s items</h4>
+        {{/if}}
+    
+        <ul>
+            {{#each items}}
+            <li class="item">{{> item}}</li>
+            {{/each}}
+        </ul>
+
+        {{#if myProfile}}   
+            <h4 class="clear-b {{inactiveEx}}">Your inactive items</h4>
+            <ul>
+                {{#each inactiveItems}}
+                    <li class="item">{{> item}}</li>
+                {{/each}}
+            </ul>
+
+            <h4 class="clear-b">Items you have hired (Total)</h4>
+            <ul>
+                {{#each hiredItems}}
+                    <li class="item">{{> item}}</li>
+                {{/each}}
+            </ul>
+        {{/if}}
+    </div>
+</template>

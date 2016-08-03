@@ -1,0 +1,44 @@
+<template name="verification">
+	<div class="padding f-none col-md-8 center-block">
+		{{#if userVerified}}
+			<span class="alert">Your identity is already verified.</span>
+		{{/if}}
+
+		{{#if verificationPending}}
+			<span class="alert">Your identity is in verification process. Please wait until we verify.</span>
+		{{/if}}
+
+		{{#if notVerified}}
+			<form class="verification-form">
+				Both files should be high quality.<br>
+
+				Your ID: 
+				<input type="file" class="your-id"><br>
+				Your photo holding the ID:
+				<input type="file" class="you-and-id">
+				<input type="submit">
+			</form>
+		{{/if}}
+
+		{{#if verificationRejected}}
+			<span class="alert">The documents you have provided were rejected. Please upload again.</span>
+
+			<ul>
+				<p>The reason might be the following/Please make sure:
+				-High quality images<br>
+				-Your own documents<br>
+				-Smile<br>
+				</p>
+			</ul>
+			<form class="verification-form">
+				Both files should be high quality.<br>
+
+				Your ID: 
+				<input type="file" class="your-id"><br>
+				Your photo holding the ID:
+				<input type="file" class="you-and-id">
+				<input class="pull-right" type="submit">
+			</form>
+		{{/if}}
+	</div>
+</template>

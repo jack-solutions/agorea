@@ -1,0 +1,97 @@
+<template name="navigation">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="genpad">
+          <a href="/">
+            <img alt="Brand" src="logo.jpeg" class="nav-logo">  
+          </a>
+            
+            <div class="pull-right desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/how-it-works">How It Works</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                     <li><a href="/items">ITEMS</a></li>
+                    <li><a href="/share-item">Share Item</a></li>
+
+                    {{#if isAdmin}}
+                        <li><a href="/admin-panel">Admin Panel</a></li>
+                    {{/if}}
+                </ul>
+                
+                <p style="float:right; margin:7px 0;">
+                        {{#if currentUser}}   
+                            <a class="msgs-btn" role="button" data-toggle="collapse" href="#messages" aria-expanded="false" aria-controls="messages"><i class="fa fa-envelope-o not-msg"></i><span class="count-badge {{ifNoMsg}}">{{messageCount}}</span></a>
+                            <a class="notif-btn" role="button" data-toggle="collapse" href="#notifications" aria-expanded="false" aria-controls="notifications"><i class="fa fa-bell-o not-bell"></i><span class="count-badge {{ifNoNotif}}">{{notifCount}}</span></a>
+                            <span class="logged-in"><a href="/{{thisUser.username}}">{{thisUser.username}}</a><button class="logout-btn"><i class="fa fa-power-off"></i></button></span>
+                        {{else}}  
+                            <a class="account-btn" data-toggle="modal" href="#regMod">Sign up</a>
+                            <a class="account-btn" href="/login">Login</a>
+                        {{/if}}       
+                    </p>
+            </div>
+            <a class="mobile-nav-btn" role="button" data-toggle="collapse" href="#mobile-nav" aria-expanded="false" aria-controls="mobileNav"><i class="fa fa-bars"></i></a>
+        </div>
+        
+        <div class="collapse" id="mobile-nav">
+            <div class="container">
+                <ul style="padding-left:10px;">
+                    <li><a href="/" data-toggle="collapse" data-target="#mobile-nav.in">Home</a></li>
+                    <li><a href="/how-it-works" data-toggle="collapse" data-target="#mobile-nav.in">How It Works</a></li>
+                    <li><a href="/about" data-toggle="collapse" data-target="#mobile-nav.in">About</a></li>
+                    <li><a href="/contact" data-toggle="collapse" data-target="#mobile-nav.in">Contact</a></li>
+                    <li><a href="/share-item" data-toggle="collapse" data-target="#mobile-nav.in">Share Item</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="collapse" id="notifications">
+            <div class="notif-head"><h5 class="not-text">Notifications</h5> <a href="#" class="mark-all-read">Mark all as read</a></div>
+            <ul class="notifications-wrapper">
+                {{{noNotif}}}
+                {{#each notifications}}
+                    {{> notification}}
+                {{/each}}
+            </ul>
+        </div>
+        
+        <div class="collapse" id="messages">
+            <div class="notif-head"><h5 class="not-text">Messages</h5> <a href="#" class="mark-all-read">Mark all as read</a></div>
+            <ul class="notifications-wrapper">
+                {{#each rooms}}
+                    <li>{{> room}}</li>
+                {{/each}}
+            </ul>
+        </div> 
+        
+    </nav>
+    
+
+    <div class="modal fade" id="regMod" tabindex="-1" role="dialog" aria-labelledby="regModLab">
+        <div class="modal-body">
+            {{> atForm}} 
+            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+</template>
+
+<template name="room">
+    <a class="open-box" href="{{pathFor route='pmBox'}}">
+        <img class="big-pic" src="{{otherUserPic}}"><strong>{{otherUsername}}</strong>
+        <p>{{lastMessage}}</p>
+    </a>
+</template>
+
+<template name="notification">
+    <a class="inh-color r-link" href="{{link}}" data-toggle="collapse" data-target="#notifications.in">
+        <li class="{{notifState}}">
+            <img class="pic-max-s" src="{{profPic}}">
+            <div class="notif-body">
+                <strong>{{sender}}</strong> {{message}} <strong>{{subject}}</strong>
+            </div>
+            <a href="#" data-toggle="tooltip" title="Mark as read" class="mark-read"><i class="fa fa-dot-circle-o"></i></a>
+        </li>
+    </a>
+</template>

@@ -1,0 +1,50 @@
+<template name="allItems">
+    <div class="left-panel padding">
+        <div class="form-group">
+                <label for="locations">Select Location:</label>
+                <select name="location" class="form-control location" id="locations">
+                    <option selected></option>
+                    {{#each locations}}
+                        <option>{{place}}</option>
+                    {{/each}}
+                </select>
+        </div>
+
+        <div class="form-group">
+                <label for="categories">Select Category:</label>
+                <select name="category" class="form-control category" id="categories">
+                    <option selected></option>
+                    {{#each categories}}
+                        <option>{{title}}</option>
+                    {{/each}}
+                </select>
+        </div>
+
+        <label for="name">Item name</label>
+        <input type="text" name="name" class="form-control item-name">
+
+        <label>Daily price range</label><br>   
+        <input class="min-price form-control pull-left half-w" type="number" min="0" value="0" name="min">   
+        <input class="max-price form-control pull-right half-w" type="number" min="0" value="500" name="max">         
+        
+    </div>
+    <div class="right-panel padding">
+        <ul>
+        	{{#each items}}
+        		<li class="item">{{> item}}</li>
+        	{{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="item">
+    <a href="{{pathFor route='singleItem'}}">
+        <div class="item-top" style="background-image:url('{{featured}}');">
+            <span class="item-band">{{title}}</span><a href="/{{ownerLink}}"><img class="item-owner pull-right" src="{{ownerPic}}"></a>
+        </div>
+        <div class="item-bottom">
+            <span class="pull-left">${{perHour}}/h | ${{perDay}}/d | ${{perWeek}}/w</span><br>
+            <span>{{location}}</span>
+        </div>
+    </a>
+</template> 

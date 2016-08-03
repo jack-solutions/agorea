@@ -1,0 +1,33 @@
+input.error{
+    background-color:rgb(255, 231, 231);
+}
+
+label.error{
+	color: red;
+}
+
+.date-time{
+	border:1px solid #ccc !important;
+}
+
+/*Style for events*/
+
+.hasEvent{
+	/*background-color: red;*/
+}
+
+.hasEventHours{
+	background-color: #3b91ad;
+	border-color: #3b91ad;
+}
+
+.hasEventDay{
+	background-color: orange;
+	border-color: orange;
+}
+
+.hasEventWeek{
+	background-color: green;
+	border-color: green;
+}
+

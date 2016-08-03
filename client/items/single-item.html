@@ -1,0 +1,57 @@
+<template name="singleItem">
+    <div class="left-panel padding">
+    	<img src="{{featured}}">
+    	<div class="s-item-bot"><span class="item-title">{{title}}</span><a href="/{{ownerLink}}"><img class="item-owner pull-right" src="{{ownerPic}}"></a></div>
+        <a class="hire-btn" href="{{pathFor 'hireItem'}}">HIRE ITEM</a>
+        {{#if isOwner}}
+            {{#if itemActive}}
+                <button class="delete-btn">DELETE ITEM</button><br>
+                <a class="edit-btn" href="{{pathFor route='editItem'}}">EDIT ITEM</a><br>
+                <button class="make-inactive btn btn-danger">DEACTIVATE</button>
+            {{else}}
+                {{#if fullInactive}}
+                    <p>This item was disabled by an admin. Please contact us.</p>
+                {{else}}
+                    <button class="make-active btn btn-success">ACTIVATE</button>
+                    <button class="delete-btn">DELETE ITEM</button><br>
+                    <a class="edit-btn" href="{{pathFor route='editItem'}}">EDIT ITEM</a><br>
+                {{/if}}
+            {{/if}}
+
+        {{else}}
+            {{#if currentUser}}
+                {{#if verified}}
+                    <!--a class="hire-btn" href="{{pathFor 'hireItem'}}">HIRE ITEM</a> -->
+                {{else}}
+                    <p class="tec mtop">You need to be verified to hire an item</p>
+                    <a class="get-verified" href="/become-verified">Become Verified</a>
+                {{/if}}
+    	   {{else}} 
+    		<a class="ntb-logged" data-toggle="modal" data-target="#regMod">HIRE ITEM</a>
+            {{/if}}
+        {{/if}}
+
+        <input type="hidden" value="{{_id}}" name="itemId" />
+    </div>
+    <div class="right-panel padding">
+    	Category: {{category}}
+    	<br>
+    	Description:
+    	{{description}}
+        <br>
+    	Cost:
+		${{perHour}}/hour -
+		${{perDay}}/day -
+    	${{perWeek}}/week
+
+        {{> calendar}}
+    </div>
+
+
+</template>
+
+<template name="calendar" >
+    {{> fullcalendar
+        options
+    }}
+</template>

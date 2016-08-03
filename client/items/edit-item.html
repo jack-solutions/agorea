@@ -1,0 +1,36 @@
+<template name="editItem">
+	<div class="half-d padding">
+		<form class="edit-item">
+			Title:
+	        <input class="form-control" type="text" name="title" value="{{title}}" maxlength="50" required/>
+	        Description:
+	        <input class="form-control" type="text" name="description" value="{{description}}" maxlength="500" required/>
+	        <p>Item price</p>
+	        <span>Per hour: </span><input type="number" name="perHour" value="{{perHour}}" maxlength="4" required/>
+	        <span>Per day: </span><input type="number" name="perDay" value="{{perDay}}" required/>
+	        <span>Per week: </span><input type="number" name="perWeek" value="{{perWeek}}" required/>
+	        <div class="form-group">
+      			<label for="categories">Select Category:</label>
+		        <select name="category" value="{{category}}" class="form-control" id="categories">
+					{{#each categories}}
+				   		<option>{{title}}</option>
+				    {{/each}}
+				</select>
+			</div>
+
+			<div class="form-group">
+                <label for="locations">Select Location:</label>
+                <select name="location" value="{{location}}" class="form-control" id="locations">
+                    {{#each locations}}
+                        <option>{{place}}</option>
+                    {{/each}}
+                </select>
+            </div>
+			
+	        <img class="profile-picture" src="{{imagePreview}}">
+	        <input type="file" class="myFileInput">
+	       <input class="hide-it" type="text" name="featured" value="{{featured}}">
+	        <button class="submit-item pull-right" type="submit">Submit</button>
+	    </form>
+	</div>
+</template>
